@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="szymon.calculator.MainActivity">
+
+
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text="dzial2"
+        android:id="@+id/button2"
+        android:layout_below="@+id/butDiv"
+        android:layout_alignLeft="@+id/butDiv"
+        android:layout_alignStart="@+id/butDiv" />
+
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text="*"
+        android:id="@+id/butMult"
+        android:layout_below="@+id/but0"
+        android:layout_toLeftOf="@+id/but0"
+        android:layout_toStartOf="@+id/but0"
+        android:onClick="clickNumber" />
+
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text="9"
+        android:id="@+id/but9"
+        android:layout_alignTop="@+id/but8"
+        android:layout_toRightOf="@+id/but8"
+        android:layout_toEndOf="@+id/but8"
+        android:onClick="clickNumber" />
+
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text="3"
+        android:id="@+id/but3"
+        android:layout_alignTop="@+id/but2"
+        android:layout_toRightOf="@+id/but2"
+        android:layout_toEndOf="@+id/but2"
+        android:onClick="clickNumber" />
+
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text="7"
+        android:id="@+id/but7"
+        android:layout_alignTop="@+id/but8"
+        android:layout_toLeftOf="@+id/but8"
+        android:layout_toStartOf="@+id/but8"
+        android:onClick="clickNumber" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editText"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="0" />
+
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text="+"
+        android:id="@+id/butPlus"
+        android:layout_below="@+id/but7"
+        android:layout_alignLeft="@+id/but7"
+        android:layout_alignStart="@+id/but7"
+        android:onClick="clickNumber" />
+
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text="0"
+        android:id="@+id/but0"
+        android:layout_below="@+id/but9"
+        android:layout_toRightOf="@+id/but7"
+        android:layout_toEndOf="@+id/but7"
+        android:onClick="clickNumber" />
+
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text="-"
+        android:id="@+id/butMinus"
+        android:layout_below="@+id/but9"
+        android:layout_toRightOf="@+id/but0"
+        android:layout_toEndOf="@+id/but0"
+        android:onClick="clickNumber" />
+
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text="dzial1"
+        android:id="@+id/butAction1"
+        android:layout_alignLeft="@+id/butMult"
+        android:layout_alignStart="@+id/butMult"
+        android:layout_below="@+id/butMult" />
+
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text="/"
+        android:id="@+id/butDiv"
+        android:layout_below="@+id/but0"
+        android:layout_toRightOf="@+id/but0"
+        android:layout_toEndOf="@+id/but0"
+        android:onClick="clickNumber" />
+
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text="="
+        android:id="@+id/butEqual"
+        android:onClick="clickNumber"
+        android:layout_below="@+id/butMult"
+        android:layout_toRightOf="@+id/butMult"
+        android:layout_toEndOf="@+id/butMult" />
+
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text="."
+        android:id="@+id/butDot"
+        android:onClick="clickNumber"
+        android:layout_alignBottom="@+id/butMult"
+        android:layout_toRightOf="@+id/butMult"
+        android:layout_toEndOf="@+id/butMult"
+        android:layout_below="@+id/butPlus" />
+
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text="2"
+        android:id="@+id/but2"
+
+        android:onClick="clickNumber"
+        android:layout_below="@+id/editText"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text="5"
+        android:id="@+id/but5"
+        android:onClick="clickNumber"
+        android:layout_below="@+id/but2"
+        android:layout_toRightOf="@+id/but1"
+        android:layout_toEndOf="@+id/but1" />
+
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text="1"
+        android:id="@+id/but1"
+        android:onClick="clickNumber"
+        android:layout_below="@+id/editText"
+        android:layout_alignLeft="@+id/editText"
+        android:layout_alignStart="@+id/editText" />
+
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text="4"
+        android:id="@+id/but4"
+        android:onClick="clickNumber"
+        android:layout_below="@+id/but1"
+        android:layout_alignLeft="@+id/but1"
+        android:layout_alignStart="@+id/but1" />
+
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text="6"
+        android:id="@+id/but6"
+        android:onClick="clickNumber"
+        android:layout_alignBottom="@+id/but5"
+        android:layout_toRightOf="@+id/but5"
+        android:layout_toEndOf="@+id/but5"
+        android:layout_below="@+id/but3" />
+
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text="8"
+        android:id="@+id/but8"
+        android:onClick="clickNumber"
+        android:layout_below="@+id/but5"
+        android:layout_toRightOf="@+id/but4"
+        android:layout_toEndOf="@+id/but4" />
+
+</RelativeLayout>
