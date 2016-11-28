@@ -25,13 +25,19 @@ public class MainActivity extends AppCompatActivity {
     private Button butAction2;
     private EditText calc;
 
-    private String calculation;
+    //private String calculation;
     private Double number1;
     private Double number2;
     private Double result;
     private boolean toErase;
     private boolean firstExists;
     private boolean secondExists;
+
+    public enum CALCULATION {
+        PLUS, MINUS, DIV, MULTI, NULL
+    }
+    CALCULATION type=CALCULATION.NULL;
+
 
 
     @Override
@@ -57,13 +63,36 @@ public class MainActivity extends AppCompatActivity {
         butAction2 = (Button) findViewById(R.id.button2);
         calc = (EditText) findViewById(R.id.editText);
 
+
         toErase = true;//czy nastepna liczba ma usunac z wyswietlacza co tam jest?
 
-        number1 = 0.0;//liczby do dzialan
-        number2 = 0.0;
+        number1 = 0d;//liczby do dzialan
+        number2 = 0d;
 
     }
+    public double calculate (double number1, double number2){
+       double result=0d;
+        switch (type)
+        {
+            case PLUS:{
+                result=number1+number2;
+                break;
+            }
 
+            case MINUS:
+                result=number2-number1;
+                break;
+            case DIV:
+                result=number2/number1;
+                break;
+            case MULTI:
+                result=number2*number1;
+                break;
+            case NULL:
+                break;
+        }
+        return result;
+    }
     public void clickNumber(View v) {
 //jedne na wszystkie przyciski, switch dla znalezienia ktore bylo wcisniete
 
@@ -159,36 +188,56 @@ public class MainActivity extends AppCompatActivity {
             case R.id.butPlus: {//dzialania nie dzialaja jakbym chcial (a wlasciwie prawie w ogole); mysle o zapisaniu ostatnio wybranego i wykonywaniu na =, ale tu prosze szczegolnie o opinie i wsparcie
                 toErase = true;
                 number2 = number1;// przepisanie wczesniejszej liczby do pamieci
-                number1 = Double.parseDouble(calc.getText().toString());//zapisanie aktualnej liczby
-                result = number1 + number2;//wykonanie dzialania; do przesuniecia do =
-                calc.setText(String.valueOf(result));//wyswietlenie wyniku; do przesuniecia do =
+                number1 = Double.parseDouble(calc.getText().toString());
+                //zapisanie aktualnej liczby
+                //if (type==CALCULATION.NULL)type=CALCULATION.PLUS;
+                type=CALCULATION.PLUS;
+                number1=calculate(number1,number2);
+
+                calc.setText(String.valueOf(number1));
+
+               // calc.setText(String.valueOf(result));//wyswietlenie wyniku; do przesuniecia do =
                 break;
             }
             case R.id.butMinus: {
                 toErase = true;
                 number2 = number1;
                 number1 = Double.parseDouble(calc.getText().toString());
-                result = number2 - number1;
-                calc.setText(String.valueOf(result));
+                type=CALCULATION.MINUS;
+                //result = number2 - number1;
+               // calc.setText(String.valueOf(result));
                 break;
             }
             case R.id.butMult: {
                 toErase = true;
                 number2 = number1;
                 number1 = Double.parseDouble(calc.getText().toString());
-                result = number1 * number2;
-                calc.setText(String.valueOf(result));
+               // result = number1 * number2;
+                type=CALCULATION.MULTI;
+               // calc.setText(String.valueOf(result));
                 break;
             }
             case R.id.butDiv: {
                 toErase = true;
                 number2 = number1;
                 number1 = Double.parseDouble(calc.getText().toString());
-                result = number2 / number1;
-                calc.setText(String.valueOf(result));
+                //result = number2 / number1;
+                type=CALCULATION.DIV;
+                //calc.setText(String.valueOf(result));
                 break;
             }
-        }
+            case R.id.butEqual: {
+                toErase = true;
+                number2=number1;
+                number1 = Double.parseDouble(calc.getText().toString());
+                result = calculate(number1,number2);
+                calc.setText(String.valueOf(result));
+                type=CALCULATION.NULL;
+                number2=0d;
+                number1=0d;
+                break;
+            }
 
+        }
     }
 }
