@@ -6,6 +6,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
 public class MainActivity extends AppCompatActivity {
     private Button but1;
     private Button but2;
@@ -31,13 +34,13 @@ public class MainActivity extends AppCompatActivity {
     private Double result;
     private boolean toErase;
     private boolean firstExists;
-    private boolean secondExists;
+    private boolean dotUsed;
 
     public enum CALCULATION {
-        PLUS, MINUS, DIV, MULTI, NULL
+        PLUS, MINUS, DIV, MULTI, NULL, POWER, MODULUS
     }
-    CALCULATION type=CALCULATION.NULL;
 
+    CALCULATION type = CALCULATION.NULL;
 
 
     @Override
@@ -60,39 +63,45 @@ public class MainActivity extends AppCompatActivity {
         butMult = (Button) findViewById(R.id.butMult);
         butDiv = (Button) findViewById(R.id.butDiv);
         butAction1 = (Button) findViewById(R.id.butAction1);
-        butAction2 = (Button) findViewById(R.id.button2);
+        butAction2 = (Button) findViewById(R.id.button2);//NIEKONSEKWENCJA!!!! poprawcie prosze
         calc = (EditText) findViewById(R.id.editText);
 
-
         toErase = true;//czy nastepna liczba ma usunac z wyswietlacza co tam jest?
-
+        firstExists = false;//czy to pierwsze po =, zeby liczyc z dwoch wartosci a nie jednej
+        dotUsed = false;
         number1 = 0d;//liczby do dzialan
         number2 = 0d;
 
     }
-    public double calculate (double number1, double number2){
-       double result=0d;
-        switch (type)
-        {
-            case PLUS:{
-                result=number1+number2;
+
+    public double calculate(double number1, double number2) {
+        double result = 0d;
+        switch (type) {
+            case PLUS: {
+                result = number1 + number2;
                 break;
             }
-
             case MINUS:
-                result=number2-number1;
+                result = number2 - number1;
                 break;
             case DIV:
-                result=number2/number1;
+                result = number2 / number1;
                 break;
             case MULTI:
-                result=number2*number1;
+                result = number2 * number1;
                 break;
             case NULL:
+                break;
+            case POWER:
+                result = pow(number2, number1);
+                break;
+            case MODULUS:
+                result = sqrt(number1 * number1 + number2 * number2);
                 break;
         }
         return result;
     }
+
     public void clickNumber(View v) {
 //jedne na wszystkie przyciski, switch dla znalezienia ktore bylo wcisniete
 
@@ -177,65 +186,154 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.butDot:
-                if (toErase) {
-                    calc.setText("0.");
-                    toErase = false;
-                } else {
-                    calc.setText(calc.getText() + ".");
+                if (!dotUsed) {
+                    if (toErase) {
+                        calc.setText("0.");
+                        toErase = false;
+                    } else {
+                        calc.setText(calc.getText() + ".");
+                    }
                 }
+                dotUsed = true;
                 break;
 
             case R.id.butPlus: {//dzialania nie dzialaja jakbym chcial (a wlasciwie prawie w ogole); mysle o zapisaniu ostatnio wybranego i wykonywaniu na =, ale tu prosze szczegolnie o opinie i wsparcie
-                toErase = true;
-                number2 = number1;// przepisanie wczesniejszej liczby do pamieci
-                number1 = Double.parseDouble(calc.getText().toString());
-                //zapisanie aktualnej liczby
-                //if (type==CALCULATION.NULL)type=CALCULATION.PLUS;
-                type=CALCULATION.PLUS;
-                number1=calculate(number1,number2);
+                if (!toErase) {
+                    toErase = true;
+                    number2 = number1;// przepisanie wczesniejszej liczby do pamieci
+                    number1 = Double.parseDouble(calc.getText().toString());
+                    //zapisanie aktualnej liczby
+                    //if (type==CALCULATION.NULL)type=CALCULATION.PLUS;
+                    type = CALCULATION.PLUS;
+                    if (firstExists) {
+                        number1 = calculate(number1, number2);
+                    }
+                    firstExists = true;
+                    calc.setText(String.valueOf(number1));
 
-                calc.setText(String.valueOf(number1));
-
-               // calc.setText(String.valueOf(result));//wyswietlenie wyniku; do przesuniecia do =
-                break;
+                    // calc.setText(String.valueOf(result));//wyswietlenie wyniku; do przesuniecia do =
+                    break;
+                } else {
+                    type = CALCULATION.PLUS;
+                    break;
+                }
             }
             case R.id.butMinus: {
-                toErase = true;
-                number2 = number1;
-                number1 = Double.parseDouble(calc.getText().toString());
-                type=CALCULATION.MINUS;
-                //result = number2 - number1;
-               // calc.setText(String.valueOf(result));
-                break;
+                if (!toErase) {
+                    toErase = true;
+                    number2 = number1;// przepisanie wczesniejszej liczby do pamieci
+                    number1 = Double.parseDouble(calc.getText().toString());
+                    //zapisanie aktualnej liczby
+                    //if (type==CALCULATION.NULL)type=CALCULATION.PLUS;
+                    type = CALCULATION.MINUS;
+                    if (firstExists) {
+                        number1 = calculate(number1, number2);
+                    }
+                    firstExists = true;
+                    calc.setText(String.valueOf(number1));
+
+                    // calc.setText(String.valueOf(result));//wyswietlenie wyniku; do przesuniecia do =
+                    break;
+                } else {
+                    type = CALCULATION.MINUS;
+                    break;
+                }
             }
             case R.id.butMult: {
-                toErase = true;
-                number2 = number1;
-                number1 = Double.parseDouble(calc.getText().toString());
-               // result = number1 * number2;
-                type=CALCULATION.MULTI;
-               // calc.setText(String.valueOf(result));
-                break;
+                if (!toErase) {
+                    toErase = true;
+                    number2 = number1;// przepisanie wczesniejszej liczby do pamieci
+                    number1 = Double.parseDouble(calc.getText().toString());
+                    //zapisanie aktualnej liczby
+                    //if (type==CALCULATION.NULL)type=CALCULATION.PLUS;
+                    type = CALCULATION.MULTI;
+                    if (firstExists) {
+                        number1 = calculate(number1, number2);
+                    }
+                    firstExists = true;
+                    calc.setText(String.valueOf(number1));
+
+                    // calc.setText(String.valueOf(result));//wyswietlenie wyniku; do przesuniecia do =
+                    break;
+                } else {
+                    type = CALCULATION.MULTI;
+                    break;
+                }
             }
             case R.id.butDiv: {
-                toErase = true;
-                number2 = number1;
-                number1 = Double.parseDouble(calc.getText().toString());
-                //result = number2 / number1;
-                type=CALCULATION.DIV;
-                //calc.setText(String.valueOf(result));
-                break;
+                if (!toErase) {
+                    toErase = true;
+                    number2 = number1;// przepisanie wczesniejszej liczby do pamieci
+                    number1 = Double.parseDouble(calc.getText().toString());
+                    //zapisanie aktualnej liczby
+                    //if (type==CALCULATION.NULL)type=CALCULATION.PLUS;
+                    type = CALCULATION.DIV;
+                    if (firstExists) {
+                        number1 = calculate(number1, number2);
+                    }
+                    firstExists = true;
+                    calc.setText(String.valueOf(number1));
+
+                    // calc.setText(String.valueOf(result));//wyswietlenie wyniku; do przesuniecia do =
+                    break;
+                } else {
+                    type = CALCULATION.DIV;
+                    break;
+                }
+            }
+            case R.id.butAction1: {
+                if (!toErase) {
+                    toErase = true;
+                    number2 = number1;// przepisanie wczesniejszej liczby do pamieci
+                    number1 = Double.parseDouble(calc.getText().toString());
+                    //zapisanie aktualnej liczby
+                    //if (type==CALCULATION.NULL)type=CALCULATION.PLUS;
+                    type = CALCULATION.POWER;
+                    if (firstExists) {
+                        number1 = calculate(number1, number2);
+                    }
+                    firstExists = true;
+                    calc.setText(String.valueOf(number1));
+
+                    // calc.setText(String.valueOf(result));//wyswietlenie wyniku; do przesuniecia do =
+                    break;
+                } else {
+                    type = CALCULATION.POWER;
+                    break;
+                }
+            }
+            case R.id.button2: {
+                if (!toErase) {
+                    toErase = true;
+                    number2 = number1;// przepisanie wczesniejszej liczby do pamieci
+                    number1 = Double.parseDouble(calc.getText().toString());
+                    //zapisanie aktualnej liczby
+                    //if (type==CALCULATION.NULL)type=CALCULATION.PLUS;
+                    type = CALCULATION.MODULUS;
+                    if (firstExists) {
+                        number1 = calculate(number1, number2);
+                    }
+                    firstExists = true;
+                    calc.setText(String.valueOf(number1));
+
+                    // calc.setText(String.valueOf(result));//wyswietlenie wyniku; do przesuniecia do =
+                    break;
+                } else {
+                    type = CALCULATION.MODULUS;
+                    break;
+                }
             }
             case R.id.butEqual: {
                 toErase = true;
-                number2=number1;
+                number2 = number1;
                 number1 = Double.parseDouble(calc.getText().toString());
-                result = calculate(number1,number2);
+                result = calculate(number1, number2);
                 calc.setText(String.valueOf(result));
-                type=CALCULATION.NULL;
-                number2=0d;
-                number1=0d;
+                type = CALCULATION.NULL;
+
+                firstExists = false;
                 break;
+
             }
 
         }
