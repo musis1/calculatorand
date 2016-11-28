@@ -210,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     firstExists = true;
                     calc.setText(String.valueOf(number1));
-
+                    dotUsed=false;
                     // calc.setText(String.valueOf(result));//wyswietlenie wyniku; do przesuniecia do =
                     break;
                 } else {
@@ -231,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     firstExists = true;
                     calc.setText(String.valueOf(number1));
-
+                    dotUsed=false;
                     // calc.setText(String.valueOf(result));//wyswietlenie wyniku; do przesuniecia do =
                     break;
                 } else {
@@ -252,7 +252,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     firstExists = true;
                     calc.setText(String.valueOf(number1));
-
+                    dotUsed=false;
                     // calc.setText(String.valueOf(result));//wyswietlenie wyniku; do przesuniecia do =
                     break;
                 } else {
@@ -273,7 +273,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     firstExists = true;
                     calc.setText(String.valueOf(number1));
-
+                    dotUsed=false;
                     // calc.setText(String.valueOf(result));//wyswietlenie wyniku; do przesuniecia do =
                     break;
                 } else {
@@ -294,7 +294,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     firstExists = true;
                     calc.setText(String.valueOf(number1));
-
+                    dotUsed=false;
                     // calc.setText(String.valueOf(result));//wyswietlenie wyniku; do przesuniecia do =
                     break;
                 } else {
@@ -315,7 +315,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     firstExists = true;
                     calc.setText(String.valueOf(number1));
-
+                    dotUsed=false;
                     // calc.setText(String.valueOf(result));//wyswietlenie wyniku; do przesuniecia do =
                     break;
                 } else {
@@ -332,6 +332,7 @@ public class MainActivity extends AppCompatActivity {
                 type = CALCULATION.NULL;
                 number1 = result;
                 firstExists = false;
+                dotUsed=false;
                 break;
 
             }
