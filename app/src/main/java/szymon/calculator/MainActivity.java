@@ -178,6 +178,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     calc.setText(calc.getText() + "9");
                 }
+                break;
             case R.id.but0:
                 if (toErase) {
                     calc.setText("0");
