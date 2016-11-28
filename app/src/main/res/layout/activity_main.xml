@@ -58,7 +58,7 @@
         android:id="@+id/editText"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="2 times = is C" />
+        android:text="Click = two times to erase" />
 
     <Button
         android:layout_width="70dp"

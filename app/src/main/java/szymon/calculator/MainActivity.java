@@ -330,7 +330,7 @@ public class MainActivity extends AppCompatActivity {
                 result = calculate(number1, number2);
                 calc.setText(String.valueOf(result));
                 type = CALCULATION.NULL;
-
+                number1 = result;
                 firstExists = false;
                 break;
 
